@@ -1,7 +1,11 @@
 package models;
 
+import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "borrowers")
 public class Borrower {
 
 	private int id;
@@ -9,11 +13,25 @@ public class Borrower {
 	private Set<Book> itemsBorrowed;
 
 
-	public Borrower(String name, Set<Book> itemsBorrowed) {
+	public Borrower(String name) {
 		this.name = name;
-		this.itemsBorrowed = itemsBorrowed;
+		this.itemsBorrowed = new HashSet<>();
 	}
 
+	public Borrower() {
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -22,6 +40,7 @@ public class Borrower {
 		this.name = name;
 	}
 
+	@OneToMany(mappedBy = "borrower", fetch = FetchType.LAZY)
 	public Set<Book> getItemsBorrowed() {
 		return this.itemsBorrowed;
 	}
@@ -29,6 +48,7 @@ public class Borrower {
 	public void setItemsBorrowed(Set<Book> itemsBorrowed) {
 		this.itemsBorrowed = itemsBorrowed;
 	}
+
 }
 
 
