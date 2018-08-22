@@ -9,8 +9,8 @@ public class Book {
     private int id;
     private String title;
     private String author;
-    private String onLoan;
-    private boolean borrower;
+    private boolean onLoan;
+    private Borrower borrower;
 
     public Book() {
     }
@@ -48,4 +48,23 @@ public class Book {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+	@Column(name="on_loan")
+	public boolean getOnLoan() {
+		return this.onLoan;
+	}
+
+	public void setOnLoan(boolean onLoan) {
+		this.onLoan = onLoan;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "borrower_id")
+	public Borrower getBorrower() {
+		return borrower;
+	}
+
+	public void setBorrower(Borrower borrower) {
+		this.borrower = borrower;
+	}
 }
