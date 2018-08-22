@@ -10,5 +10,9 @@ public class Runner {
 
         Borrower borrower1 = new Borrower("Harvey Bullock");
         DBHelper.save(borrower1);
+
+        borrower1.borrowBook(book1);
+        DBHelper.save(borrower1);
+        DBHelper.save(book1);
     }
 }

@@ -1,6 +1,8 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -10,12 +12,12 @@ public class Borrower {
 
 	private int id;
 	private String name;
-	private Set<Book> itemsBorrowed;
+	private List<Book> itemsBorrowed;
 
 
 	public Borrower(String name) {
 		this.name = name;
-		this.itemsBorrowed = new HashSet<>();
+		this.itemsBorrowed = new ArrayList<>();
 
 	}
 
@@ -42,13 +44,20 @@ public class Borrower {
 	}
 
 	@OneToMany(mappedBy = "borrower", fetch = FetchType.LAZY)
-	public Set<Book> getItemsBorrowed() {
+	public List<Book> getItemsBorrowed() {
 		return this.itemsBorrowed;
 	}
 
-	public void setItemsBorrowed(Set<Book> itemsBorrowed) {
+	public void setItemsBorrowed(List<Book> itemsBorrowed) {
 		this.itemsBorrowed = itemsBorrowed;
 	}
+
+	public void borrowBook(Book book){
+	    if (!book.getOnLoan()) {
+            this.itemsBorrowed.add(book);
+            book.setOnLoan(true);
+        }
+    }
 
 }
 
