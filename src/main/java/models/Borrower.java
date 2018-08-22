@@ -1,5 +1,6 @@
 package models;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Borrower {
@@ -9,9 +10,9 @@ public class Borrower {
 	private Set<Book> itemsBorrowed;
 
 
-	public Borrower(String name, Set<Book> itemsBorrowed) {
+	public Borrower(String name) {
 		this.name = name;
-		this.itemsBorrowed = itemsBorrowed;
+		this.itemsBorrowed = new HashSet<>();
 	}
 
 	public String getName() {
